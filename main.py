@@ -5,6 +5,7 @@ import math
 import pandas as pd
 from openpyxl import load_workbook
 from pathlib import Path
+from collections import deque
 
 # icon from: https://icons8.com
 # author: Philipp Schaeffner
@@ -18,7 +19,7 @@ import_dir = local_dir + '/IMPORT/'
 export_dir = local_dir + '/EXPORT/'
 export_excel_dir = export_dir + 'DONE.xlsx'
 header_list = ['Comment', 'Date', 'Time', 'Duration', 'STIPA', 'LAeq', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status']
-
+protokoll_format = 'STIPA'
 
 # ************************************************** FUNCTIONS ************************************************** #
 
@@ -28,17 +29,33 @@ def count_files(y):
         if os.path.isfile(os.path.join(y, path)):
             x += 1
 
-
 def printandquit_if_zero(y, z):
     if y == 0:
         print(z)
         input('Press any key to close...')
         exit()
 
-
 def check_protokoll_type(y, z):
     if z not in y[0]:
         printandquit_if_zero(0,'ERROR: Falsches Protokoll Format!')
+
+def check_if_date(y):
+    # date format [YYYY-MM-DD]
+    z = False
+    pattern = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", re.IGNORECASE)
+    if pattern.match(y):
+        z = True
+    else:
+        z = False
+    return z
+
+def checkandset_comment(y):
+    if check_if_date(y[0]):
+        a = deque(y)
+        a.append('Positions Name')
+        a.rotate(1)
+        y = list(deque(a))
+    return y
 
 # ************************************************** MAIN LOOP ************************************************** #
 
@@ -65,12 +82,11 @@ for filename in os.listdir(import_dir):
         f = open(import_dir + filename, 'r')                             
         if f.mode == 'r':
             lines = f.readlines()
-
-            check_protokoll_type(lines, 'STIPA')
-
+            check_protokoll_type(lines, protokoll_format)
             messurements = lines[18]
             messurements = re.sub(r'\s+', ';', messurements.strip())
             messurements_list = messurements.split(';')
+            messurements_list = checkandset_comment(messurements_list)
             for i in range(len(header_list)):
                 #print(str(i) + '_' + str(count) + '_' + str(len(messurements_list)))
                 data[count][i] = messurements_list[i]
