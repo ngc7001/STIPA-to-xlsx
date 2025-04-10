@@ -25,7 +25,7 @@ protokoll_format = 'STIPA'
 
 
 def check_sourcexlsx():
-    if os.path.isfile(local_dir + '/bin/' + 'BASE.xlsx'):
+    if not os.path.isfile(local_dir + '/bin/' + 'BASE.xlsx'):
         printandquit_if_zero(0, 'ERROR: Basis Tabelle (BASE.xlsx) fehlt!')
 
 def create_imex_dir():
@@ -74,6 +74,7 @@ def checkandset_comment(y):
 # ************************************************** MAIN LOOP ************************************************** #
 
 create_imex_dir()
+check_sourcexlsx()
 
 number_of_imports = count_files(import_dir)
 
