@@ -9,6 +9,9 @@ from pathlib import Path
 # icon from: https://icons8.com
 # author: Philipp Schaeffner
 
+
+# *************************************************** GLOBALS *************************************************** #
+
 local_dir = str(Path(__file__).resolve().parent)
 
 import_dir = local_dir + '/IMPORT/'
@@ -16,15 +19,38 @@ export_dir = local_dir + '/EXPORT/'
 export_excel_dir = export_dir + 'DONE.xlsx'
 header_list = ['Comment', 'Date', 'Time', 'Duration', 'STIPA', 'LAeq', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status', 'LZeq', 'mr1', 'mr2', 'Status']
 
+
+# ************************************************** FUNCTIONS ************************************************** #
+
+def count_files(y):
+    x = 0
+    for path in os.listdir(y):
+        if os.path.isfile(os.path.join(y, path)):
+            x += 1
+
+
+def printandquit_if_zero(y, z):
+    if y == 0:
+        print(z)
+        input('Press any key to close...')
+        exit()
+
+
+def check_protokoll_type(y, z):
+    if z not in y[0]:
+        printandquit_if_zero(0,'ERROR: Falsches Protokoll Format!')
+
+# ************************************************** MAIN LOOP ************************************************** #
+
+
+number_of_imports = count_files(import_dir)
+
 number_of_imports = 0
 for path in os.listdir(import_dir):
     if os.path.isfile(os.path.join(import_dir, path)):
         number_of_imports += 1
 
-if number_of_imports == 0:
-    print('ERROR: IMPORT Pfad ist leer!')
-    input('Press any key to close...')
-    exit()
+printandquit_if_zero(number_of_imports, 'ERROR: IMPORT Pfad ist leer!')
 
 number_of_sheets = math.ceil((number_of_imports - 3) / 3)
 
@@ -39,6 +65,9 @@ for filename in os.listdir(import_dir):
         f = open(import_dir + filename, 'r')                             
         if f.mode == 'r':
             lines = f.readlines()
+
+            check_protokoll_type(lines, 'STIPA')
+
             messurements = lines[18]
             messurements = re.sub(r'\s+', ';', messurements.strip())
             messurements_list = messurements.split(';')
@@ -141,12 +170,6 @@ for i in range(number_of_sheets + 1):
 
 workbook.save(filename=export_excel_dir)
 
-print('DONE.xlsx wurde Erfolgreich erstellt!')
-input('Press any key to continue...')
 
-
-
-
-
-
+printandquit_if_zero(0, 'DONE.xlsx wurde Erfolgreich erstellt!')
     
