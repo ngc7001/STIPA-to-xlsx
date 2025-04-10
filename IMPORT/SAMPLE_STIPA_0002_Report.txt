@@ -1,0 +1,23 @@
+XL3 STIPA Report:
+----------------
+
+
+# Hardware Configuration
+	Device Info:    	XL3, SNo. A3A-01247-F0, FW1.38
+	Mic Type:       	NTi Audio M4260, SNo. 2187, Calibrated 2024-08-20 14:07
+	Mic Sensitivity:	33.02 mV/Pa
+	Mic Config:     	Free Field, No Accessory
+	Time Zone:      	Europe/Berlin (UTC +02:00 DST)
+
+# Measurement Setup
+	IEC 60268-16:   	ed5.0 2020
+
+# STIPA Results
+	                     	       	            	            	            	        	        	        	Band [Hz]    	   125.0	        	        	        	   250.0	        	        	        	   500.0	        	        	        	  1000.0	        	        	        	  2000.0	        	        	        	  4000.0	        	        	        	  8000.0	        	        	        
+	Comment              	 Cycle 	Date        	Time        	Duration    	   STIPA	    LAeq	  Status	             	    LZeq	     mr1	     mr2	  Status	    LZeq	     mr1	     mr2	  Status	    LZeq	     mr1	     mr2	  Status	    LZeq	     mr1	     mr2	  Status	    LZeq	     mr1	     mr2	  Status	    LZeq	     mr1	     mr2	  Status	    LZeq	     mr1	     mr2	  Status
+	                     	       	[YYYY-MM-DD]	[hh:mm:ss]  	[hh:mm:ss]  	   [STI]	    [dB]	        	             	    [dB]	    [x1]	    [x1]	        	    [dB]	    [x1]	    [x1]	        	    [dB]	    [x1]	    [x1]	        	    [dB]	    [x1]	    [x1]	        	    [dB]	    [x1]	    [x1]	        	    [dB]	    [x1]	    [x1]	        	    [dB]	    [x1]	    [x1]	        
+	3                    	       	2025-04-09  	08:40:46    	00:00:15    	    0.47	    74.4	      OK	             	    75.3	    0.63	    0.55	      OK	    79.3	    0.81	    0.26	      OK	    72.5	    0.84	    0.24	      OK	    67.7	    0.53	    0.07	      OK	    60.4	    0.66	    0.41	      OK	    49.3	    0.73	    0.38	      OK	    41.2	    0.37	    0.30	      OK
+
+
+#CheckSum
+	z0XF97DlNtAyxqK+evnHcXt/sZItwn39fITt0YjaAfOmbbnOOJOC+IMavfG7QCOIbuXKOvmXuK+xQJezjY05V3oshzbCinU0k6ECH1Z8XFWeQVvvVct3E3zhuYFyFCaEPUeKR3++mE+Q98okY5s81Jn+ZuNbR34kTmsHjqieHql+YSykbVFr7eGyThWOHLwPK4fLmPyzFCHIMsobZ6aRvg==
