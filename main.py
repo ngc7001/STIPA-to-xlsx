@@ -23,6 +23,20 @@ protokoll_format = 'STIPA'
 
 # ************************************************** FUNCTIONS ************************************************** #
 
+
+def check_sourcexlsx():
+    if os.path.isfile(local_dir + '/bin/' + 'BASE.xlsx'):
+        printandquit_if_zero(0, 'ERROR: Basis Tabelle (BASE.xlsx) fehlt!')
+
+def create_imex_dir():
+    if not os.path.exists(import_dir):
+        os.makedirs(import_dir)
+        print('IMPORT Ordner in: ' + str(import_dir) + ' erfolgreich erstellt!')
+    if not os.path.exists(export_dir):
+        os.makedirs(export_dir)
+        print('EXPORT Ordner in: ' + str(export_dir) + ' erfolgreich erstellt!')
+
+
 def count_files(y):
     x = 0
     for path in os.listdir(y):
@@ -59,6 +73,7 @@ def checkandset_comment(y):
 
 # ************************************************** MAIN LOOP ************************************************** #
 
+create_imex_dir()
 
 number_of_imports = count_files(import_dir)
 
@@ -187,5 +202,5 @@ for i in range(number_of_sheets + 1):
 workbook.save(filename=export_excel_dir)
 
 
-printandquit_if_zero(0, 'DONE.xlsx wurde Erfolgreich erstellt!')
+printandquit_if_zero(0, 'DONE.xlsx wurde erfolgreich erstellt!')
     
